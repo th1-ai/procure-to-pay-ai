@@ -1,0 +1,9 @@
+{
+  "id": "inv-005",
+  "vendor": "Harbourview Linens",
+  "invoice_no": "HL-4502",
+  "amount_eur": 500.00,
+  "currency": "EUR",
+  "po_ref": "PO-99999",
+  "description": "Bath linen top-up, quotes a PO that does not exist in the ledger"
+}

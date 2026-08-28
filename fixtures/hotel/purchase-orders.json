@@ -1,0 +1,37 @@
+[
+  {
+    "po_ref": "PO-00101",
+    "vendor": "Harbourview Linens",
+    "amount_eur": 1240.00,
+    "description": "Linen replacement - Q3",
+    "received": true
+  },
+  {
+    "po_ref": "PO-00102",
+    "vendor": "Atlantic Seafood Co.",
+    "amount_eur": 1572.50,
+    "description": "Weekly seafood delivery",
+    "received": true
+  },
+  {
+    "po_ref": "PO-00103",
+    "vendor": "CleanNest Supplies",
+    "amount_eur": 58.00,
+    "description": "Office cleaning supplies",
+    "received": true
+  },
+  {
+    "po_ref": "PO-00104",
+    "vendor": "GreenScape Grounds",
+    "amount_eur": 340.00,
+    "description": "Grounds maintenance - August",
+    "received": false
+  },
+  {
+    "po_ref": "PO-00105",
+    "vendor": "Northshore Electrics",
+    "amount_eur": 210.00,
+    "description": "Lighting fixtures - poolside",
+    "received": false
+  }
+]

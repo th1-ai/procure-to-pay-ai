@@ -1,0 +1,9 @@
+{
+  "id": "req-001",
+  "title": "Coffee machine quarterly service",
+  "department": "F&B",
+  "requested_by": "Restaurant Manager",
+  "vendor": "Bean & Brew Maintenance",
+  "amount_eur": 450.00,
+  "budget_line": "F&B"
+}

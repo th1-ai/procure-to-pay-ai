@@ -1,0 +1,4 @@
+{
+  "subject": "Awaiting your sign-off - Pool pump replacement",
+  "body": "Hello, the requisition for the pool pump replacement (EUR 4,200.00 against Property) has been waiting for your approval for a few days. Could you approve it when you have a moment by running: python3 tools/requisition.py approve req-002 --role \"Department Head\"? Thank you.\n\nPurchasing, Hotel Aurora"
+}

@@ -1,0 +1,5 @@
+{
+  "id": "gr-003",
+  "po_ref": "PO-99999",
+  "note": "Delivery note quotes a PO the ledger has never heard of - a no-op, not an error."
+}

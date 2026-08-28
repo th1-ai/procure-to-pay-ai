@@ -1,0 +1,30 @@
+[
+  {
+    "id": "pool-deck-refurb",
+    "title": "Pool deck refurbishment",
+    "category": "Property",
+    "budget_eur": 68000,
+    "stage": "draft",
+    "quotes": [
+      {"vendor": "Azure Pool Works", "amount": 61400, "weeks": 9,
+       "note": "Phased so the pool stays half-open, 5-year warranty"},
+      {"vendor": "Coastal Build Co.", "amount": 54900, "weeks": 7,
+       "note": "Excludes scope for drainage renewal"},
+      {"vendor": "Granite Construct", "amount": 71200, "weeks": 6,
+       "note": "3-year warranty"}
+    ]
+  },
+  {
+    "id": "kitchen-fridge",
+    "title": "Kitchen fridge replacement",
+    "category": "Equipment",
+    "budget_eur": 31500,
+    "stage": "draft",
+    "quotes": [
+      {"vendor": "ColdChain Supply", "amount": 29800, "weeks": 2,
+       "note": "2-year warranty"},
+      {"vendor": "Arctic Commercial", "amount": 33500, "weeks": 3,
+       "note": "3-year warranty, includes install"}
+    ]
+  }
+]

@@ -1,0 +1,9 @@
+{
+  "id": "req-002",
+  "title": "Pool pump replacement",
+  "department": "Property",
+  "requested_by": "Chief Engineer",
+  "vendor": "Northshore Electrics",
+  "amount_eur": 4200.00,
+  "budget_line": "Property"
+}

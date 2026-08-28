@@ -1,0 +1,5 @@
+{
+  "id": "gr-002",
+  "po_ref": "PO-00101",
+  "note": "Duplicate scan of an already-received delivery note - the agent must treat this as a no-op, not an error."
+}

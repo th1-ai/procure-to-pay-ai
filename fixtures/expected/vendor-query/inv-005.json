@@ -1,0 +1,4 @@
+{
+  "subject": "Unrecognised purchase order on invoice HL-4502",
+  "body": "Hello, invoice HL-4502 for EUR 500.00 quotes PO-99999, which does not exist in our purchase-order ledger. Could you confirm the correct PO reference, or let us know if this order was placed without one so we can raise a retrospective PO? Thank you.\n\nAccounts Payable, Hotel Aurora"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "inv-002",
+  "vendor": "Atlantic Seafood Co.",
+  "invoice_no": "ASC-9102",
+  "amount_eur": 1719.00,
+  "currency": "EUR",
+  "po_ref": "PO-00102",
+  "description": "Weekly seafood delivery"
+}

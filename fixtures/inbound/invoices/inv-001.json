@@ -1,0 +1,9 @@
+{
+  "id": "inv-001",
+  "vendor": "Harbourview Linens",
+  "invoice_no": "HL-4471",
+  "amount_eur": 1240.00,
+  "currency": "EUR",
+  "po_ref": "PO-00101",
+  "description": "Linen replacement - Q3"
+}

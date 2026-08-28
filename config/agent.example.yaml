@@ -1,0 +1,126 @@
+# ---------------------------------------------------------------------------
+# agent.yaml - Procure-to-Pay AI's own knobs (on top of config/hotel.yaml).
+#
+# `make setup` copies this file to config/agent.yaml. Edit THAT one.
+# ---------------------------------------------------------------------------
+
+# --- Which systems this agent actually reads/writes through core/adapters --
+# Requisitions, purchase orders, goods receipts and invoices do NOT come from
+# core/adapters - they come from the three small readers configured further
+# down (po_reader / invoice_reader / receipt_reader), see docs/integrations.md.
+# The one core adapter this agent uses is email: the vendor query on a held
+# invoice, the vendor confirmation, the approval chase and the letter of award
+# all go out that way. It never reads a PMS and never sends a guest chat
+# message, so pms and messaging are left out here on purpose: their adapters
+# stay `mock` forever and must never trigger the "SAMPLE DATA" warning.
+# Listing email still warns you correctly if THAT is left on mock once you are
+# running for real. (This key only understands pms/email/messaging; the sheets
+# adapter used for payment-batch and report exports is configured separately in
+# config/hotel.yaml.)
+systems_used: [email]
+
+# The delegation-of-authority matrix. Amount bands, ascending, first match
+# wins - write the FULL chain for each band, it is not additive in code.
+# Every requisition gets this chain the moment its budget check clears; a
+# role may approve in any order (see docs/how-it-works.md, design decision 3).
+delegation_matrix:
+  - max_eur: 1000
+    roles: ["Department Head"]
+  - max_eur: 10000
+    roles: ["Department Head", "General Manager"]
+  - max_eur: null                          # no ceiling - the last band always matches
+    roles: ["Department Head", "General Manager", "Owner"]
+
+# One line per budget a requisition can be raised against. "committed_eur" is
+# never stored here - it is computed live from open requisitions, see
+# docs/how-it-works.md design decision 2.
+budgets:
+  "F&B": {limit_eur: 20000}
+  "Housekeeping": {limit_eur: 8000}
+  "Property": {limit_eur: 50000}
+  "Software": {limit_eur: 6000}
+  "Sundry": {limit_eur: 4000}
+
+# Purchase-order matching (spec's "2% and EUR100, whichever bites second").
+# A variance must breach BOTH to hold a payment.
+matching:
+  tolerance_pct: 2
+  tolerance_eur: 100
+  no_po_threshold_eur: 1000   # non-utility, no-PO invoices below this may clear
+
+# Vendors that may clear a small no-PO invoice under the threshold above.
+# A vendor NOT on this list is always held for a retrospective PO, even under
+# the threshold - see finance-filing-ai's identical design decision.
+approved_vendors:
+  - "cleannest supplies"
+  - "greenscape grounds"
+
+# Where an approved vendor query, vendor confirmation or award letter is sent
+# once a human approves it (tools/review.py send). A vendor with no address
+# here blocks the send with a clear message rather than guessing one - see
+# docs/integrations.md.
+vendor_emails:
+  "docapesca seafood lda": ""
+  "greenscape grounds": ""
+  "cleannest supplies": ""
+
+# Who an approval-chase email goes to, by delegation-of-authority role.
+approver_emails:
+  "Department Head": ""
+  "General Manager": ""
+  "Owner": ""
+
+# The one on/off switch this agent's page is built to prove. Off: every
+# invoice with a po_ref clears on the vendor's word alone, no PO or receipt
+# checked at all. Flip it, run `make run` again, read the new reason string.
+# capex-three-quotes is the Tender & CAPEX sub-agent's own toggle - off lets
+# a recommendation through with fewer than three comparable quotes on file.
+rules:
+  three-way: true
+  capex-three-quotes: true
+
+# Where purchase orders and invoices come from when you are not on the mock
+# fixtures. Both are small readers in tools/, not core adapters yet - see
+# docs/integrations.md.
+po_reader:
+  adapter: mock   # mock | csv
+invoice_reader:
+  adapter: mock   # mock | csv
+receipt_reader:
+  adapter: mock   # mock | csv
+
+# Tender & CAPEX Approval AI ("The Chancellor") - off by default. The parent
+# agent is fully useful without it: requisitions, POs, receipts and invoice
+# matching all work with this off. Turning it on adds the tender/CAPEX board
+# - quote comparison, a scored recommendation, a three-role approval chain,
+# and a drafted letter of award. See docs/sub-agents.md and
+# workflows/20-tender-capex.md.
+subagents:
+  tender_capex:
+    enabled: false
+    three_quote_threshold_eur: 25000
+    roles: ["Chief Engineer", "General Manager", "Owner rep"]
+
+# Approval chase ticklers (requisitions AND, if enabled, CAPEX approvals).
+chase:
+  gap_days: 3          # days between chase emails to the same approver
+  max_follow_ups: 3    # after this many, the item is escalated, not chased again
+
+llm:
+  # Per-task effort override (falls back to llm.effort in hotel.yaml).
+  vendor_query_effort: medium
+  vendor_confirmation_effort: low
+  approval_chase_effort: low
+  award_letter_effort: medium
+
+# One entry per recurring job. `tools/schedule.py --all` (or
+# `make schedule ARGS="--all"`) prints one cron/launchd/systemd snippet per
+# entry below - see README section 9 and scheduler/crontab.example, which
+# show exactly that output.
+schedule:
+  procure-to-pay:
+    command: tools/run.py --once
+    cadence: every-15-min
+  approval-chase:
+    command: tools/chase.py
+    cadence: morning

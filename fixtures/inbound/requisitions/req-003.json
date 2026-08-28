@@ -1,0 +1,9 @@
+{
+  "id": "req-003",
+  "title": "Annual PMS license renewal",
+  "department": "Front Office",
+  "requested_by": "Front Office Manager",
+  "vendor": "CloudStay Systems",
+  "amount_eur": 9000.00,
+  "budget_line": "Software"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "inv-003",
+  "vendor": "CleanNest Supplies",
+  "invoice_no": "CNS-330",
+  "amount_eur": 61.20,
+  "currency": "EUR",
+  "po_ref": "PO-00103",
+  "description": "Office cleaning supplies"
+}

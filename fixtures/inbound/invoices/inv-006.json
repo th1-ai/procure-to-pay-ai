@@ -1,0 +1,9 @@
+{
+  "id": "inv-006",
+  "vendor": "CleanNest Supplies",
+  "invoice_no": "CNS-341",
+  "amount_eur": 240.00,
+  "currency": "EUR",
+  "po_ref": null,
+  "description": "Emergency supply top-up, no PO required under threshold"
+}

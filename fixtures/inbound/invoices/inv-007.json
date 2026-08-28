@@ -1,0 +1,9 @@
+{
+  "id": "inv-007",
+  "vendor": "Riverside Print & Copy",
+  "invoice_no": "RPC-118",
+  "amount_eur": 180.00,
+  "currency": "EUR",
+  "po_ref": null,
+  "description": "Reception signage reprint - vendor is not on the approved list"
+}
